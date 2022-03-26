@@ -12,6 +12,26 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+import csv
+from collections import Counter, defaultdict
+from datetime import datetime
+
+
+def load_data():
+
+    csvfile = open('data.csv', 'r')
+
+    reader = csv.reader(csvfile, delimiter='\t')
+
+    data = []
+
+    for column in reader:
+
+        data.append((column[0], column[1], column[2], column[3] ,column[4]))
+
+    return data
+
+#c
 
 def pregunta_01():
     """
