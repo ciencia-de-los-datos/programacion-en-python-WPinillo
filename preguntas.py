@@ -18,7 +18,10 @@ from datetime import datetime
 
 
 def load_data():
+<<<<<<< HEAD
     "Funcion para leer archivo csv"
+=======
+>>>>>>> origin
 
     csvfile = open('data.csv', 'r')
 
@@ -32,7 +35,10 @@ def load_data():
 
     return data
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 
 def pregunta_01():
     "Calcula la suma de la segunda columna"
