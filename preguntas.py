@@ -15,14 +15,11 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 import csv
 from collections import Counter, defaultdict
 from datetime import datetime
+from itertools import groupby
 
 
 def load_data():
-<<<<<<< HEAD
     "Funcion para leer archivo csv"
-=======
->>>>>>> origin
-
     csvfile = open('data.csv', 'r')
 
     reader = csv.reader(csvfile, delimiter='\t')
@@ -35,42 +32,33 @@ def load_data():
 
     return data
 
-<<<<<<< HEAD
+datos = load_data()
 
-=======
->>>>>>> origin
-
-def pregunta_01():
+def pregunta_01(datos):
     "Calcula la suma de la segunda columna"
 
     suma = 0
 
-    for column in datos:
+    for col in datos:
         
-        suma += int(column[1])
+        suma += int(col[1])
 
     return suma
 
 
-def pregunta_02():
+def pregunta_02(datos):
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
-
-    Rta/
-    [
-        ("A", 8),
-        ("B", 7),
-        ("C", 5),
-        ("D", 6),
-        ("E", 14),
-    ]
-
     """
-    return
+    data = [row[0] for row in datos]
 
+    result = Counter(data).most_common()
+    result.sort(reverse=False)
 
-def pregunta_03():
+    return result
+
+def pregunta_03(datos):
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
@@ -85,10 +73,22 @@ def pregunta_03():
     ]
 
     """
-    return
+    dic = {}
+
+    for col in datos:
+
+        if col[0] not in dic:
+            dic[col[0]] = int(col[1])
+        else:
+            dic[col[0]] += int(col[1])
+
+    tupla = list(zip(dic.keys(), dic.values()))
+    tupla.sort()
+
+    return tupla
 
 
-def pregunta_04():
+def pregunta_04(datos):
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
@@ -110,10 +110,10 @@ def pregunta_04():
     ]
 
     """
-    return
+    mes = [col[2].split("-")[1] for col in datos]
+    return sorted(list(Counter(mes).items()))
 
-
-def pregunta_05():
+def pregunta_05(datos):
     """
     Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
     letra de la columa 1.
@@ -128,10 +128,21 @@ def pregunta_05():
     ]
 
     """
-    return
+    dic = {}
+
+    for col in datos:
+
+        if col[0] in dic.keys():
+          dic[col[0]].append(int(col[1]))
+        else:
+          dic[col[0]] = [int(col[1])]
+
+    result  = [(a, max(dic[a]), min(dic[a])) for a in dic.keys()]
+    result = sorted(result, key = lambda tup: tup[0])
+    return result 
 
 
-def pregunta_06():
+def pregunta_06(datos):
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -153,10 +164,30 @@ def pregunta_06():
     ]
 
     """
-    return
+    lista_tuplas = []
+
+    for clave in datos:
+
+        texto = clave[4]
+        string = texto.split(",")
+        for term in string:
+            lista_tuplas.append((term[:3], int(term[4:])))
+
+    lista_tuplas = sorted(lista_tuplas, key=lambda termino : termino[0])
+
+    resultmax = [(k, max([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])]
+    resultmin = [(k, min([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])]
+
+    tup0=[x[0] for x in resultmax]
+    tup1=[x[1] for x in resultmin]
+    tup2=[x[1] for x in resultmax]
+
+    result= list(zip(tup0, tup1,tup2))
+    
+    return result
 
 
-def pregunta_07():
+def pregunta_07(datos):
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
@@ -177,10 +208,21 @@ def pregunta_07():
     ]
 
     """
-    return
+    lista_tuplas = []
+
+    for clave in datos:
+        texto = clave[1]
+        string = texto.split()
+        letras = clave[0]
+        for term in string:
+            lista_tuplas.append((int(term), letras))
+
+    lista_tuplas = sorted(lista_tuplas, key=lambda termino : termino[0])
+    result = [(k, ([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])]
+    return result
 
 
-def pregunta_08():
+def pregunta_08(datos):
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
@@ -202,10 +244,22 @@ def pregunta_08():
     ]
 
     """
-    return
+    lista_tuplas = []
+
+    for clave in datos:
+        texto = clave[1]
+        string = texto.split()
+        letras = clave[0]
+        for term in string:
+            lista_tuplas.append((int(term), letras))
+            lista_tuplas1 = sorted(list(set(lista_tuplas)))
+
+    lista_tuplas1 = sorted(lista_tuplas1, key=lambda termino : termino[0])
+    result = [(k, ([e[1] for e in g])) for k, g in groupby(lista_tuplas1, lambda x:x[0])]
+    return result
 
 
-def pregunta_09():
+def pregunta_09(datos):
     """
     Retorne un diccionario que contenga la cantidad de registros en que aparece cada
     clave de la columna 5.
@@ -225,10 +279,20 @@ def pregunta_09():
     }
 
     """
-    return
+    lista_tuplas = []
+
+    for clave in datos:
+            texto = clave[4]
+            string = texto.split(",")
+            for term in string:
+                lista_tuplas.append((term[:3],1))
+
+    lista_tuplas = sorted(lista_tuplas, key=lambda termino : termino[0])
+    result = dict([(k, sum([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])])
+    return result
 
 
-def pregunta_10():
+def pregunta_10(datos):
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
     cantidad de elementos de las columnas 4 y 5.
@@ -267,7 +331,20 @@ def pregunta_11():
 
 
     """
-    return
+    lista_tuplas = []
+
+    for clave in datos:
+        texto = clave[3]
+        string = texto.split(",")
+        columna2=clave[1]
+        for term in columna2:
+            for term2 in string:
+                lista_tuplas.append((term2,int(term)))
+        
+    lista_tuplas = sorted(lista_tuplas, key=lambda termino : termino[0])
+    result = dict([(k, sum([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])])
+    
+    return result
 
 
 def pregunta_12():
@@ -285,4 +362,30 @@ def pregunta_12():
     }
 
     """
-    return
+    lista_tuplas = []
+
+    for clave in datos:
+        texto = clave[4]
+        string = texto.split(",")
+        columna1=clave[0]
+        for term in columna1:
+            for term2 in string:
+                lista_tuplas.append((term,int(term2[4:])))
+
+    lista_tuplas = sorted(lista_tuplas, key=lambda termino : termino[0])
+    result = dict([(k, sum([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])])
+    
+    return result
+
+pregunta_01(datos)
+pregunta_02(datos)
+pregunta_03(datos)
+pregunta_04(datos)
+pregunta_05(datos)
+pregunta_06(datos)
+pregunta_07(datos)
+pregunta_08(datos)
+pregunta_09(datos)
+pregunta_10(datos)
+pregunta_11(datos)
+pregunta_12(datos)
