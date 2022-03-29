@@ -369,8 +369,24 @@ def pregunta_10():
 
 
     """
-    x=0
-    return x
+    import csv
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+
+    lista_tuplas = []
+
+    for clave in datos:
+            texto = clave[0]
+            string = texto.split()
+            column4=len(clave[3].split(","))
+            column5=len(clave[4].split(","))
+            for term in string:
+                lista_tuplas.append((term,column4,column5))
+
+    return lista_tuplas
 
 
 def pregunta_11():
