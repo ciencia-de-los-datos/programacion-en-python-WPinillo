@@ -12,30 +12,34 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
-import csv
-from collections import Counter, defaultdict
-from datetime import datetime
-from itertools import groupby
+# import csv
+# from collections import Counter
+# from itertools import groupby
 
 
-def load_data():
-    "Funcion para leer archivo csv"
-    csvfile = open('data.csv', 'r')
+# def load_data():
+#     "Funcion para leer archivo csv"
+#     csvfile = open('data.csv', 'r')
 
-    reader = csv.reader(csvfile, delimiter='\t')
+#     reader = csv.reader(csvfile, delimiter='\t')
 
-    data = []
+#     data = []
 
-    for column in reader:
+#     for column in reader:
 
-        data.append((column[0], column[1], column[2], column[3] ,column[4]))
+#         data.append((column[0], column[1], column[2], column[3] ,column[4]))
 
-    return data
+#     return data
 
-datos = load_data()
+# datos = load_data()
 
 def pregunta_01():
     "Calcula la suma de la segunda columna"
+    import csv
+
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
 
     suma = 0
 
@@ -51,6 +55,13 @@ def pregunta_02():
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
     """
+    import csv
+    from collections import Counter
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     data = [row[0] for row in datos]
 
     result = Counter(data).most_common()
@@ -73,6 +84,11 @@ def pregunta_03():
     ]
 
     """
+    import csv
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
     dic = {}
 
     for col in datos:
@@ -110,6 +126,13 @@ def pregunta_04():
     ]
 
     """
+    import csv
+    from collections import Counter
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+
     mes = [col[2].split("-")[1] for col in datos]
     return sorted(list(Counter(mes).items()))
 
@@ -128,6 +151,13 @@ def pregunta_05():
     ]
 
     """
+    import csv
+    from collections import Counter
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     dic = {}
 
     for col in datos:
@@ -164,6 +194,14 @@ def pregunta_06():
     ]
 
     """
+    import csv
+    from collections import Counter
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+        
     lista_tuplas = []
 
     for clave in datos:
@@ -208,6 +246,13 @@ def pregunta_07():
     ]
 
     """
+    import csv
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     lista_tuplas = []
 
     for clave in datos:
@@ -244,6 +289,13 @@ def pregunta_08():
     ]
 
     """
+    import csv
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     lista_tuplas = []
 
     for clave in datos:
@@ -279,6 +331,13 @@ def pregunta_09():
     }
 
     """
+    import csv
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     lista_tuplas = []
 
     for clave in datos:
@@ -332,6 +391,13 @@ def pregunta_11():
 
 
     """
+    import csv
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     lista_tuplas = []
 
     for clave in datos:
@@ -363,6 +429,13 @@ def pregunta_12():
     }
 
     """
+    import csv
+    from itertools import groupby
+    
+    with open("data.csv", newline='') as f:
+        reader=csv.reader(f,delimiter="\t")
+        datos = list(reader)
+    
     lista_tuplas = []
 
     for clave in datos:
@@ -377,16 +450,3 @@ def pregunta_12():
     result = dict([(k, sum([e[1] for e in g])) for k, g in groupby(lista_tuplas, lambda x:x[0])])
     
     return result
-
-pregunta_01()
-pregunta_02()
-pregunta_03()
-pregunta_04()
-pregunta_05()
-pregunta_06()
-pregunta_07()
-pregunta_08()
-pregunta_09()
-pregunta_10()
-pregunta_11()
-pregunta_12()
