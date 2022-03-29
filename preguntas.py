@@ -34,7 +34,7 @@ def load_data():
 
 datos = load_data()
 
-def pregunta_01(datos):
+def pregunta_01():
     "Calcula la suma de la segunda columna"
 
     suma = 0
@@ -46,7 +46,7 @@ def pregunta_01(datos):
     return suma
 
 
-def pregunta_02(datos):
+def pregunta_02():
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
@@ -58,7 +58,7 @@ def pregunta_02(datos):
 
     return result
 
-def pregunta_03(datos):
+def pregunta_03():
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
@@ -88,7 +88,7 @@ def pregunta_03(datos):
     return tupla
 
 
-def pregunta_04(datos):
+def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
@@ -113,7 +113,7 @@ def pregunta_04(datos):
     mes = [col[2].split("-")[1] for col in datos]
     return sorted(list(Counter(mes).items()))
 
-def pregunta_05(datos):
+def pregunta_05():
     """
     Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
     letra de la columa 1.
@@ -142,7 +142,7 @@ def pregunta_05(datos):
     return result 
 
 
-def pregunta_06(datos):
+def pregunta_06():
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -187,7 +187,7 @@ def pregunta_06(datos):
     return result
 
 
-def pregunta_07(datos):
+def pregunta_07():
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
@@ -222,7 +222,7 @@ def pregunta_07(datos):
     return result
 
 
-def pregunta_08(datos):
+def pregunta_08():
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
@@ -259,7 +259,7 @@ def pregunta_08(datos):
     return result
 
 
-def pregunta_09(datos):
+def pregunta_09():
     """
     Retorne un diccionario que contenga la cantidad de registros en que aparece cada
     clave de la columna 5.
@@ -292,7 +292,7 @@ def pregunta_09(datos):
     return result
 
 
-def pregunta_10(datos):
+def pregunta_10():
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
     cantidad de elementos de las columnas 4 y 5.
@@ -310,7 +310,8 @@ def pregunta_10(datos):
 
 
     """
-    return
+    x=0
+    return x
 
 
 def pregunta_11():
